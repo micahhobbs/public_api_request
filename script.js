@@ -38,30 +38,59 @@ function append(parent, element) {
   return parent.appendChild(element);
 }
 
-// Attribute
-function add(element, attribute, value) {
-  return element.setAttribute(attribute, value);
-}
-
 // Gallery DOM element
 const gallery = document.querySelector(`#gallery`);
+
+let employees = [];
+
+// function test() {
+//   console.log(`Hey!`);
+// }
 
 // Get random users
 fetch('https://randomuser.me/api/?results=12')
   .then(response => response.json())
   .then(function(data) {
-    const employees = data.results;
+    employees = data.results;
     employees.map(employee => {
       const card = create(`div`);
-      const container = create(`div`);
+      const imageContainer = create(`div`);
       const image = create(`img`);
+      const infoContainer = create(`div`);
+      const name = create(`h3`);
+      const email = create(`p`);
+      const location = create(`p`);
       card.setAttribute(`class`, `card`);
-      container.setAttribute(`class`, `card-img-container`);
+      imageContainer.setAttribute(`class`, `card-img-container`);
       image.setAttribute(`class`, `card-img`);
       image.setAttribute(`src`, `${employee.picture.medium}`);
-      append(container, image);
-      append(card, container);
+      infoContainer.setAttribute(`class`, `card-info-container`);
+      name.setAttribute(`id`, `name`);
+      name.setAttribute(`class`, `card-name`);
+      name.setAttribute(`class`, `cap`);
+      name.textContent = `${employee.name.first} ${employee.name.last}`;
+      email.setAttribute(`class`, `card-text`);
+      email.textContent = `${employee.email}`;
+      location.setAttribute(`class`, `card-text`);
+      location.setAttribute(`class`, `card-text`);
+      location.textContent = `${employee.location.city}, ${
+        employee.location.state
+      }`;
+      append(imageContainer, image);
+      append(infoContainer, name);
+      append(infoContainer, email);
+      append(infoContainer, location);
+      append(card, imageContainer);
+      append(card, infoContainer);
       append(gallery, card);
+    });
+  })
+  .then(function() {
+    const cards = document.querySelectorAll(`.card`);
+    cards.forEach(card => {
+      card.addEventListener(`clicked`, function() {
+        console.log(`You clicked a card!`);
+      });
     });
   })
   .catch(function(error) {});
