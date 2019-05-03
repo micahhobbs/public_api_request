@@ -43,9 +43,10 @@ const gallery = document.querySelector(`#gallery`);
 
 let employees = [];
 
-// function test() {
-//   console.log(`Hey!`);
-// }
+// CreateCard()
+function createCard() {}
+
+// CreateModal()
 
 // Get random users
 fetch('https://randomuser.me/api/?results=12')
@@ -88,7 +89,7 @@ fetch('https://randomuser.me/api/?results=12')
   .then(function() {
     const cards = document.querySelectorAll(`.card`);
     cards.forEach(card => {
-      card.addEventListener(`clicked`, function() {
+      card.addEventListener(`click`, function() {
         console.log(`You clicked a card!`);
       });
     });
