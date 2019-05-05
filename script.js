@@ -50,7 +50,12 @@ const button = document.createElement(`button`);
 button.setAttribute(`type`, `button`);
 button.setAttribute(`id`, `modal-close-btn`);
 button.setAttribute(`class`, `modal-close-btn`);
+
 button.insertAdjacentHTML(`afterbegin`, `<strong>X</strong>`);
+
+function insertAfter(el, referenceNode) {
+  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
 
 append(modal, button);
 append(modalContainer, modal);
@@ -114,7 +119,6 @@ fetch('https://randomuser.me/api/?nat=au&results=12')
   .then(function() {
     // Create modal info elements based on card clicked
     // Theres a lot in this, could split out like createCard function
-    // TODO later, post submission
     const cards = document.querySelectorAll(`.card`);
     cards.forEach(function(card, index) {
       card.addEventListener(`click`, function(event) {
