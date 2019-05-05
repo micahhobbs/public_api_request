@@ -12,7 +12,6 @@ function append(parent, element) {
 
 // Dynamically create HTML elements
 // Form
-const searchContainer = document.querySelector(`.search-container`);
 const form = document.createElement(`form`);
 form.setAttribute(`action`, `#`);
 form.setAttribute(`method`, `get`);
@@ -57,8 +56,10 @@ function insertAfter(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
-append(modal, button);
-append(modalContainer, modal);
+// Append
+function append(parent, element) {
+  return parent.appendChild(element);
+}
 
 // Gallery DOM element
 const gallery = document.querySelector(`#gallery`);
@@ -74,46 +75,46 @@ button.addEventListener(`click`, closeModal);
 let employees = [];
 
 // CreateCard()
-function createCard(employee) {
-  const card = create(`div`);
-  const imageContainer = create(`div`);
-  const image = create(`img`);
-  const infoContainer = create(`div`);
-  const name = create(`h3`);
-  const email = create(`p`);
-  const location = create(`p`);
-  card.setAttribute(`class`, `card`);
-  imageContainer.setAttribute(`class`, `card-img-container`);
-  image.setAttribute(`class`, `card-img`);
-  image.setAttribute(`src`, `${employee.picture.medium}`);
-  infoContainer.setAttribute(`class`, `card-info-container`);
-  name.setAttribute(`id`, `name`);
-  name.setAttribute(`class`, `card-name`);
-  name.setAttribute(`class`, `cap`);
-  name.textContent = `${employee.name.first} ${employee.name.last}`;
-  email.setAttribute(`class`, `card-text`);
-  email.textContent = `${employee.email}`;
-  location.setAttribute(`class`, `card-text`);
-  location.setAttribute(`class`, `cap`);
-  location.textContent = `${employee.location.city}, ${
-    employee.location.state
-  }`;
-  append(imageContainer, image);
-  append(infoContainer, name);
-  append(infoContainer, email);
-  append(infoContainer, location);
-  append(card, imageContainer);
-  append(card, infoContainer);
-  append(gallery, card);
-}
+function createCard() {}
+
+// CreateModal()
 
 // Get random users
-fetch('https://randomuser.me/api/?nat=au&results=12')
+fetch('https://randomuser.me/api/?results=12')
   .then(response => response.json())
   .then(function(data) {
     employees = data.results;
     employees.map(employee => {
-      createCard(employee);
+      const card = create(`div`);
+      const imageContainer = create(`div`);
+      const image = create(`img`);
+      const infoContainer = create(`div`);
+      const name = create(`h3`);
+      const email = create(`p`);
+      const location = create(`p`);
+      card.setAttribute(`class`, `card`);
+      imageContainer.setAttribute(`class`, `card-img-container`);
+      image.setAttribute(`class`, `card-img`);
+      image.setAttribute(`src`, `${employee.picture.medium}`);
+      infoContainer.setAttribute(`class`, `card-info-container`);
+      name.setAttribute(`id`, `name`);
+      name.setAttribute(`class`, `card-name`);
+      name.setAttribute(`class`, `cap`);
+      name.textContent = `${employee.name.first} ${employee.name.last}`;
+      email.setAttribute(`class`, `card-text`);
+      email.textContent = `${employee.email}`;
+      location.setAttribute(`class`, `card-text`);
+      location.setAttribute(`class`, `card-text`);
+      location.textContent = `${employee.location.city}, ${
+        employee.location.state
+      }`;
+      append(imageContainer, image);
+      append(infoContainer, name);
+      append(infoContainer, email);
+      append(infoContainer, location);
+      append(card, imageContainer);
+      append(card, infoContainer);
+      append(gallery, card);
     });
   })
   .then(function() {
@@ -171,6 +172,4 @@ fetch('https://randomuser.me/api/?nat=au&results=12')
       });
     });
   })
-  .catch(function(error) {
-    console.log(error);
-  });
+  .catch(function(error) {});
