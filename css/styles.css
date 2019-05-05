@@ -101,7 +101,7 @@ header h1 {
 .card-img {
   width: 95px;
   margin: 10px 15px auto 10px;
-  border-radius: 50%;
+  border-radius: 2%;
 }
 
 .card-info-container {

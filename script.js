@@ -1,17 +1,14 @@
 // TODO implement create and append helper function throughout code
 
-// Create
+// Create html elements helper function
 function create(element) {
   return document.createElement(element);
 }
 
-// Append
+// Append htnl elements helper function
 function append(parent, element) {
   return parent.appendChild(element);
 }
-
-// Get HTML elements
-const body = document.getElementsByTagName(`body`);
 
 // Dynamically create HTML elements
 // Form
@@ -35,27 +32,25 @@ submit.setAttribute(`id`, `search-submit`);
 submit.setAttribute(`class`, `search-submit`);
 
 // Add input elements to form
-form.appendChild(search);
-form.appendChild(submit);
+append(form, search);
+append(form, submit);
 
 // Add form to DOM
-searchContainer.appendChild(form);
+append(searchContainer, form);
+
+// Get HTML elements
+const body = document.getElementsByTagName(`body`);
 
 // Create constant modals elements
 const modalContainer = document.createElement(`div`);
-modalContainer.classList.add(`modal-container`);
+modalContainer.setAttribute(`class`, `modal-container`);
 const modal = document.createElement(`div`);
-modal.classList.add(`modal`);
+modal.setAttribute(`class`, `modal`);
 const button = document.createElement(`button`);
 button.setAttribute(`type`, `button`);
 button.setAttribute(`id`, `modal-close-btn`);
 button.setAttribute(`class`, `modal-close-btn`);
-
 button.insertAdjacentHTML(`afterbegin`, `<strong>X</strong>`);
-
-function insertAfter(el, referenceNode) {
-  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-}
 
 append(modal, button);
 append(modalContainer, modal);
@@ -63,15 +58,10 @@ append(modalContainer, modal);
 // Gallery DOM element
 const gallery = document.querySelector(`#gallery`);
 
-// Modal container
-// gallery.insertAdjacentElement(`afterend`, modalContainer);
-
 function closeModal() {
-  modalContainer.classList.add(`close`);
-  modal.removeChild(modal.lastChild);
+  modalContainer.setAttribute(`class`, `close`);
 
-  //   body.removeChild(modalContainer);
-  //   // modalContainer.remove;
+  modal.removeChild(modal.lastChild);
 }
 
 button.addEventListener(`click`, closeModal);
@@ -122,11 +112,14 @@ fetch('https://randomuser.me/api/?nat=au&results=12')
     });
   })
   .then(function() {
+    // Create modal info elements based on card clicked
+    // Theres a lot in this, could split out like createCard function
+    // TODO later, post submission
     const cards = document.querySelectorAll(`.card`);
     cards.forEach(function(card, index) {
       card.addEventListener(`click`, function(event) {
         const modalInfoContainer = create(`div`);
-        modalInfoContainer.classList.add(`modal-info-container`);
+        modalInfoContainer.setAttribute(`class`, `modal-info-container`);
         const modalImage = create(`img`);
         modalImage.setAttribute(`class`, `modal-img`);
         modalImage.setAttribute(`alt`, `profile picture`);
@@ -135,9 +128,8 @@ fetch('https://randomuser.me/api/?nat=au&results=12')
         modalName.setAttribute(`id`, `name`);
         modalName.setAttribute(`class`, `modal-name`);
         modalName.setAttribute(`class`, `cap`);
-        modalName.textContent = `${employees[index].name.first} ${
-          employees[index].name.last
-        }`;
+        modalName.textContent = `${employees[index].name.first} 
+                                 ${employees[index].name.last}`;
         const modalEmail = create(`p`);
         modalEmail.setAttribute(`class`, `modal-text`);
         modalEmail.textContent = employees[index].email;
@@ -152,11 +144,10 @@ fetch('https://randomuser.me/api/?nat=au&results=12')
         const modalAddress = create(`p`);
         modalAddress.setAttribute(`class`, `modal-text`);
         modalAddress.setAttribute(`class`, `cap`);
-        modalAddress.textContent = `${employees[index].location.street}, ${
-          employees[index].location.city
-        }, ${employees[index].location.state}, ${
-          employees[index].location.postcode
-        }`;
+        modalAddress.textContent = `${employees[index].location.street}, 
+                                    ${employees[index].location.city}, 
+                                    ${employees[index].location.state}, 
+                                    ${employees[index].location.postcode}`;
         const modalBirthday = create(`p`);
         modalBirthday.setAttribute(`class`, `modal-text`);
         modalBirthday.textContent = `Birthday: ${employees[
