@@ -10,7 +10,6 @@ function append(parent, element) {
 
 // Dynamically create HTML elements
 // Form
-const searchContainer = document.querySelector(`.search-container`);
 const form = document.createElement(`form`);
 form.setAttribute(`action`, `#`);
 form.setAttribute(`method`, `get`);
@@ -64,7 +63,7 @@ let employees = [];
 function createCard() {}
 
 // Get random users
-fetch('https://randomuser.me/api/?results=12&nat=au')
+fetch('https://randomuser.me/api/?results=12')
   .then(response => response.json())
   .then(function(data) {
     employees = data.results;
