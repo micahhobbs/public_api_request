@@ -1,11 +1,9 @@
-// TODO implement create and append helper function throughout code
-
-// Create html elements helper function
+// Create helper function
 function create(element) {
   return document.createElement(element);
 }
 
-// Append htnl elements helper function
+// Append helper function
 function append(parent, element) {
   return parent.appendChild(element);
 }
@@ -15,25 +13,21 @@ function append(parent, element) {
 const form = document.createElement(`form`);
 form.setAttribute(`action`, `#`);
 form.setAttribute(`method`, `get`);
-
 // Form input
 const search = document.createElement(`input`);
 search.setAttribute(`type`, `search`);
 search.setAttribute(`id`, `search-input`);
 search.setAttribute(`class`, `search-input`);
 search.setAttribute(`placeholder`, `Seach...`);
-
 // Form button
 const submit = document.createElement(`input`);
 submit.setAttribute(`type`, `submit`);
 submit.setAttribute(`value`, `Find`);
 submit.setAttribute(`id`, `search-submit`);
 submit.setAttribute(`class`, `search-submit`);
-
 // Add input elements to form
-append(form, search);
-append(form, submit);
-
+form.appendChild(search);
+form.appendChild(submit);
 // Add form to DOM
 append(searchContainer, form);
 
@@ -49,24 +43,18 @@ const button = document.createElement(`button`);
 button.setAttribute(`type`, `button`);
 button.setAttribute(`id`, `modal-close-btn`);
 button.setAttribute(`class`, `modal-close-btn`);
-
 button.insertAdjacentHTML(`afterbegin`, `<strong>X</strong>`);
 
-function insertAfter(el, referenceNode) {
-  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-}
-
-// Append
-function append(parent, element) {
-  return parent.appendChild(element);
-}
+append(modal, button);
+append(modalContainer, modal);
 
 // Gallery DOM element
 const gallery = document.querySelector(`#gallery`);
 
 function closeModal() {
-  modalContainer.setAttribute(`class`, `close`);
-
+  // If I change this to .className or setAttribute it breaks when I close a modal open another
+  // not sure why??
+  modalContainer.classList.add(`close`);
   modal.removeChild(modal.lastChild);
 }
 
@@ -118,11 +106,11 @@ fetch('https://randomuser.me/api/?results=12')
     });
   })
   .then(function() {
-    // Create modal info elements based on card clicked
-    // Theres a lot in this, could split out like createCard function
+    // This seems like a lot
+    // Could split out into out function like createCard() above
     const cards = document.querySelectorAll(`.card`);
     cards.forEach(function(card, index) {
-      card.addEventListener(`click`, function(event) {
+      card.addEventListener(`click`, function() {
         const modalInfoContainer = create(`div`);
         modalInfoContainer.setAttribute(`class`, `modal-info-container`);
         const modalImage = create(`img`);
