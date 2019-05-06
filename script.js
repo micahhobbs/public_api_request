@@ -10,6 +10,7 @@ function append(parent, element) {
 
 // Dynamically create HTML elements
 // Form
+const searchContainer = document.querySelector(`.search-container`);
 const form = document.createElement(`form`);
 form.setAttribute(`action`, `#`);
 form.setAttribute(`method`, `get`);
@@ -59,11 +60,8 @@ button.addEventListener(`click`, closeModal);
 
 let employees = [];
 
-// CreateCard()
-function createCard() {}
-
 // Get random users
-fetch('https://randomuser.me/api/?results=12')
+fetch('https://randomuser.me/api/?results=12&nat=au')
   .then(response => response.json())
   .then(function(data) {
     employees = data.results;
@@ -87,7 +85,7 @@ fetch('https://randomuser.me/api/?results=12')
       email.setAttribute(`class`, `card-text`);
       email.textContent = `${employee.email}`;
       location.setAttribute(`class`, `card-text`);
-      location.setAttribute(`class`, `card-text`);
+      location.setAttribute(`class`, `cap`);
       location.textContent = `${employee.location.city}, ${
         employee.location.state
       }`;
