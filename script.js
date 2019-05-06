@@ -31,9 +31,6 @@ form.appendChild(submit);
 // Add form to DOM
 append(searchContainer, form);
 
-// Get HTML elements
-const body = document.getElementsByTagName(`body`);
-
 // Create constant modals elements
 const modalContainer = document.createElement(`div`);
 modalContainer.setAttribute(`class`, `modal-container`);
