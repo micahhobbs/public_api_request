@@ -51,7 +51,7 @@ const gallery = document.querySelector(`#gallery`);
 
 function closeModal() {
   // If I change this to .className or setAttribute it breaks when I close a modal open another
-  // not sure why?
+  // not sure why??
   modalContainer.classList.add(`close`);
   modal.removeChild(modal.lastChild);
 }
